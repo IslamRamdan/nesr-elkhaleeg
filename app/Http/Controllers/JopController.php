@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CompanySetting;
 use App\Models\DocumentType;
 use Google\Client;
 use Google\Service\Gmail;
@@ -128,7 +129,7 @@ class JopController extends Controller
         $customers = Customer::whereIn("id", $request->customer_ids)->get();
         foreach ($customers as $customer) {
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer 714|qEOqBniIAUxUDwelNt6yR243dSFztZgBeEOmcm8Hb27a6438',
+                'Authorization' => CompanySetting::first()->token,
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
             ])->post('https://bulk.whysms.com/api/v3/sms/send', [
@@ -319,7 +320,7 @@ class JopController extends Controller
     {
         $customer = Customer::find($customerId);
         Http::withHeaders([
-            'Authorization' => 'Bearer 490|iWcKkcltFVb9x4Or4r1uWDbUBiPXt1N4qU7bHmMM61249c65',
+            'Authorization' => CompanySetting::first()->token,
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
         ])->post('https://bulk.whysms.com/api/v3/sms/send', [

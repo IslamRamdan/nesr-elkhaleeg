@@ -528,4 +528,64 @@ class LeadsCustomersController extends Controller
         $exists = LeadsCustomers::where('card_id', $request->card_id)->exists();
         return response()->json(['exists' => $exists]);
     }
+
+    // انشاء عميل محتمل من صفحة الهوم
+    public function createLead(Request $request)
+    {
+        $request->validate([
+            "card_id" => 'required|unique:leads_customers,card_id',
+            "phone" => 'required|unique:leads_customers,phone',
+            "phone_two" => 'nullable|unique:leads_customers,phone_two',
+        ], [
+            'card_id.required' => 'الرقم القومي مطلوب.',
+            'card_id.unique' => 'الرقم القومي موجود من قبل.',
+
+            'phone.required' => 'رقم الهاتف مطلوب.',
+            'phone.unique' => 'رقم الهاتف موجود من قبل.',
+
+            'phone_two.unique' => 'رقم الهاتف الاخر موجود من قبل.',
+        ]);
+        $lead = $request->all();
+
+        // رفع الصور إذا كانت موجودة
+        if ($request->hasFile('image')) {
+            $lead['image'] = $request->file('image')->store('uploads', 'public');
+        }
+        if ($request->hasFile('passport_photo')) {
+            $lead['passport_photo'] = $request->file('passport_photo')->store('uploads', 'public');
+        }
+        if ($request->hasFile('img_national_id_card')) {
+            $lead['img_national_id_card'] = $request->file('img_national_id_card')->store('uploads', 'public');
+        }
+        if ($request->hasFile('img_national_id_card_back')) {
+            $lead['img_national_id_card_back'] = $request->file('img_national_id_card_back')->store('uploads', 'public');
+        }
+        if ($request->hasFile('license_photo')) {
+            $lead['license_photo'] = $request->file('license_photo')->store('uploads', 'public');
+        }
+
+        $lead['status'] = 'عميل محتمل';
+        $lead['customer_id'] = null;
+        $lead['evaluation'] = "جارى المعالجة";
+        $lead['password'] = Hash::make($lead["phone"]);
+
+        $lead = LeadsCustomers::create($lead);
+        if ($request->has('questions')) {
+            foreach ($request->questions as $questionId => $answer) {
+
+                // لو checkbox ممكن يجي Array
+                if (is_array($answer)) {
+                    $answer = implode(',', $answer);
+                }
+
+                JobAnswer::create([
+                    'job_question_id' => $questionId,
+                    'lead_id' => $lead->id,
+                    'answer' => $answer,
+                ]);
+            }
+        }
+
+        return redirect()->back()->with('success', 'تم انشاء العميل المحتمل بنجاح');
+    }
 }

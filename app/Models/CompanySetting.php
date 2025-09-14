@@ -16,5 +16,6 @@ class CompanySetting extends Model
         'engaz_password',
         'token',
         'medical_email',
+        'company_card_test'
     ];
 }

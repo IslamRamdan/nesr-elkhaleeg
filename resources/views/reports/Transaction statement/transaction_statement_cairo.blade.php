@@ -39,7 +39,7 @@
             margin: auto;
             box-sizing: border-box;
             page-break-after: always;
-            background: url("{{ asset('./Screenshot_1.png') }}") no-repeat center center;
+            background: url("{{ asset('./photo.jpg') }}") no-repeat center center;
             background-size: cover;
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
@@ -156,10 +156,10 @@
                 <h2>كشف دخول جوازات</h2>
                 <table class="info-table">
                   <tr>
-                    <td colspan="2">اسم المكتب / <b>شركة الميثاق لالحاق العمالة المصرية بالخارج ترخيص (768)</b></td>
+                    <td colspan="2">اسم المكتب / <b> {{ $company->name }} لالحاق العمالة المصرية بالخارج ترخيص ({{ $company->license_number }})</b></td>
                   </tr>
                   <tr>
-                    <td colspan="2">صندوق رقم (<span>${escapeHtml(headerData.boxNumber)}</span>) ترخيص رقم ( <span>768</span> )</td>
+                    <td colspan="2">صندوق رقم (<span>${escapeHtml(headerData.boxNumber)}</span>) ترخيص رقم ( <span>{{ $company->license_number }}</span> )</td>
                   </tr>
                   <tr>
                     <td colspan="2">نوع التاشيرة ( <span>${escapeHtml(headerData.visa)}</span> )</td>

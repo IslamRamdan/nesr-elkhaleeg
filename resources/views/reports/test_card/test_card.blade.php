@@ -290,7 +290,7 @@
                 <div class="company-info">
                     <h1>{{ $company->name }}</h1>
                     <p>لالحاق العمالة المصرية بالخارج</p>
-                    <p>ترخيص رقم (768) قوى عاملة ذ.م.م</p>
+                    <p>ترخيص رقم ({{ $company->license_number }}) قوى عاملة </p>
                 </div>
             </div>
             <div class="number-box">

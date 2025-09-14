@@ -143,8 +143,9 @@ class ReportsController extends Controller
             return redirect()->back()->withErrors(['لا توجد معاملات لهذه الحقيبة تخص سفارة القاهرة.']);
         }
         $customers = $customers->toArray();
+        $company = CompanySetting::first();
 
-        return view("reports.Transaction statement.transaction_statement_cairo", compact('bag', 'customers'));
+        return view("reports.Transaction statement.transaction_statement_cairo", compact('bag', 'customers', 'company'));
     }
 
     public function transaction_statement_suez($id)
@@ -166,8 +167,9 @@ class ReportsController extends Controller
 
         // نحول الـ Collection لآراي
         $customers = $customers->toArray();
+        $company = CompanySetting::first();
 
-        return view("reports.Transaction statement.transaction_statement_souis", compact('bag', 'customers'));
+        return view("reports.Transaction statement.transaction_statement_souis", compact('bag', 'customers', 'company'));
     }
 
     public function print_visaEntriy($id)

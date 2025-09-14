@@ -1163,7 +1163,7 @@
                                     <!-- الحالة على التطبيق -->
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="fw-bold" style="color: #343a40;">الحالة على التطبيق</label>
+                                            <label class="fw-bold" style="color: #343a40;">الحالة</label>
                                             <select id="attachmentRequired" class="form-control fw-bold"
                                                 style="height: 60px; border-color: #343a40;" name="required" required>
                                                 <option selected value="true">اجباري</option>
@@ -1205,7 +1205,7 @@
                                                 <th>عنوان المرفق</th>
                                                 <th>المرفق</th>
                                                 <th>حالة المرفق</th>
-                                                <th>الحالة علي التطبيق</th>
+                                                <th>الحالة</th>
                                                 <th>ملحوظة</th>
                                                 <th>الإجراءات</th>
                                             </tr>

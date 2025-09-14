@@ -87,6 +87,16 @@
                             @endif
                         </div>
                         <div class="col-md-4 form-group">
+                            <label class="font-weight-bold">جملة في كارت الاختبار (تحت اسم الشركة)</label>
+                            <input type="text" class="form-control" name="company_card_test"
+                                value="{{ $company->company_card_test ?? '' }}" required>
+                            @if ($errors->has('company_card_test'))
+                                <div class="text-danger">
+                                    {{ $errors->first('company_card_test') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="col-md-4 form-group">
                             <label class="font-weight-bold d-block mb-2">شعار الشركة</label>
                             <div class="d-flex align-items-center gap-3">
                                 <input type="file" class="form-control" name="logo" style="max-width: 70%;">

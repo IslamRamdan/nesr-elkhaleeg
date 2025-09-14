@@ -230,7 +230,7 @@
 
                     <table class="ts-info-table">
                         <tr>
-                            <td colspan="2">اسم المكتب / <b>شركة الميثاق لالحاق العمالة المصرية بالخارج ترخيص (768)</b></td>
+                            <td colspan="2">اسم المكتب / <b>{{ $company->name }}  لالحاق العمالة المصرية بالخارج ترخيص ({{ $company->license_number }})</b></td>
                         </tr>
                         <tr>
                             <td colspan="2" id="ts-delegate-row">اسم المندوب / <span id="ts-delegate-name">احمد بشير</span></td>
@@ -252,7 +252,7 @@
 
                 <div class="ts-footer">
                     <div class="ts-footer-line"> المستلم /</div>
-                    <div class="ts-footer-line">أقر أنا مندوب مكتب <b>شركة الميثاق لالحاق العمالة المصرية بالخارج ترخيص (768)</b></div>
+                    <div class="ts-footer-line">أقر أنا مندوب مكتب <b> {{ $company->name }} لالحاق العمالة المصرية بالخارج ترخيص ({{ $company->license_number }})</b></div>
                     <div class="ts-footer-line">بأنني استلمت جميع المعاملات المشار إليها في البيان أعلاه وعلى هذا جرى التوقيع .</div>
                     <div class="ts-footer-line">الاسم /</div>
                     <div class="ts-footer-line">التوقيع /</div>

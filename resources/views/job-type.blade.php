@@ -127,30 +127,13 @@
                                     <td>#{{ $job->id }}</td>
                                     <td>{{ $job->title }}</td>
                                     <td>
-                                        <form action="{{ route('customers.filter') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="job_title_id" value="{{ $job->id }}">
-                                            <button class="badge bg-success text-white">
-                                                {{ $job->customers->count() }} عميل
-                                            </button>
-                                        </form>
+                                        {{ $job->customers->count() }} عميل
                                     </td>
                                     <td class="d-flex justify-content-center align-items-center gap-1">
                                         <a href="{{ route('job-type.index', $job->id) }}"
                                             class="btn btn-sm btn-outline-success shadow-sm" title="تعديل">
                                             <i class="fas fa-edit"></i>
                                         </a>
-
-                                        {{-- <form action="{{ route('job-type.delete', $job->id) }}" method="POST"
-                                            class="mx-1">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-sm btn-outline-danger shadow-sm" type="submit"
-                                                title="حذف" onsubmit="confirmDelete(event)">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form> --}}
-
                                     </td>
                                 </tr>
                             @endforeach

@@ -943,7 +943,7 @@
         });
 
 
-
+        // تعيين اختبار
         document.getElementById('assignGroupForm').addEventListener('submit', function(e) {
             e.preventDefault(); // منع الريفريش
 
@@ -955,6 +955,7 @@
                     icon: "error",
                     draggable: true
                 });
+                document.getElementById('loading-overlay').style.display = 'none';
                 return;
             }
 

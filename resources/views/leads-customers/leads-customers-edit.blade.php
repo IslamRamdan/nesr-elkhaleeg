@@ -71,12 +71,12 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="phone"
                                             value="{{ $lead->phone }}">
-                                        <div class="input-group-append">
+                                        {{-- <div class="input-group-append">
                                             <a href="{{ route('reset.password.lead', $lead->id) }}"
                                                 class="btn btn-warning">
                                                 إعادة تعيين الباسورد
                                             </a>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     @if ($errors->has('phone'))
                                         <div class="text-danger">

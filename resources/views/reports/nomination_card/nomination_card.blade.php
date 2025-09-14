@@ -245,7 +245,7 @@
 
     <div class="container">
         {{-- <img src="./Screenshot_1.png" alt="استمارة ترشيح"> --}}
-        <img src="{{ asset('./Screenshot_1.png') }}" alt="صورة شخصية">
+        <img src="{{ asset('./photo.jpg') }}" alt="صورة شخصية">
 
         <div class="overlay">
             <!-- عنوان الاستمارة -->
