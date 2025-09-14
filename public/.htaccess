@@ -1,0 +1,17 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # اجعل /public_html هو الرووت
+    RewriteBase /
+
+    # لو الطلب لملف أو مجلد موجود فعليًا → اتركه
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+
+    # أي طلب غير ذلك يروح لـ index.php
+    RewriteRule ^ index.php [L]
+</IfModule>
