@@ -4,1295 +4,1241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إضافة عميل جديد</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/cropperjs@1.6.2/dist/cropper.min.css" rel="stylesheet">
+    <title>نسر الخليج - إلحاق العمالة المصرية بالخارج</title>
+    <meta name="description"
+        content="نسر الخليج - شركة رائدة في إلحاق العمالة المصرية بدول الخليج والعالم، نربط المواهب بأفضل الفرص الوظيفية">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <style>
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+
         :root {
-            --primary-color: #667eea;
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-color: #4facfe;
-            --secondary-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --success-color: #48bb78;
-            --success-gradient: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
-            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            --hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-            --border-radius: 12px;
-            --transition: all 0.3s ease;
+            --primary-color: #1B365D;
+            --secondary-color: #C9A961;
+            --accent-color: #F4E4BC;
+            --text-dark: #2C3E50;
+            --text-light: #6C757D;
+            --white: #FFFFFF;
+            --light-bg: #F8F9FA;
         }
 
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
-            padding: 20px 0;
+            background: var(--white);
+            color: var(--text-dark);
+            line-height: 1.6;
         }
 
-        .card {
-            border: none;
-            border-radius: var(--border-radius);
-            box-shadow: var(--card-shadow);
-            transition: var(--transition);
-            background: white;
-            overflow: hidden;
-        }
-
-        .card:hover {
-            box-shadow: var(--hover-shadow);
-            transform: translateY(-2px);
-        }
-
-        .card-header {
-            background: var(--primary-gradient) !important;
-            color: white;
-            border-bottom: none;
-            padding: 20px 25px;
-            position: relative;
-        }
-
-        .card-header::before {
-            content: '';
-            position: absolute;
+        /* Header Styles */
+        .navbar {
+            background: var(--white) !important;
+            box-shadow: 0 2px 20px rgba(27, 54, 93, 0.1);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .card-header h3 {
-            margin: 0;
-            font-weight: 600;
-            position: relative;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card-header h3::before {
-            content: '👤';
-            font-size: 1.2em;
-        }
-
-        .card-body {
-            padding: 30px;
-            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            font-weight: 600;
-            color: #4a5568;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .form-control,
-        .custom-file-input+.custom-file-label {
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 2px 6px;
-            font-size: 14px;
-            transition: var(--transition);
-            background: white;
-        }
-
-        .form-control:focus,
-        .custom-file-input:focus+.custom-file-label {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-            outline: none;
-        }
-
-        .form-control:hover,
-        .custom-file-input+.custom-file-label:hover {
-            border-color: #cbd5e0;
-        }
-
-        select.form-control {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-            background-position: left 12px center;
-            background-repeat: no-repeat;
-            background-size: 16px 12px;
-        }
-
-        /* صناديق الصور المحسنة */
-        .form-group.p-3 {
-            background: linear-gradient(135deg, #ffffff 0%, #f7fafc 100%) !important;
-            border: 2px solid #e2e8f0 !important;
-            border-radius: var(--border-radius) !important;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .form-group.p-3::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--secondary-gradient);
-        }
-
-        .form-group.p-3:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12) !important;
-            border-color: var(--secondary-color) !important;
-        }
-
-        .custom-file {
-            margin-bottom: 15px;
-        }
-
-        .custom-file-label {
-            border: 2px dashed #cbd5e0;
-            background: #f7fafc;
-            color: #718096;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .custom-file-label:hover {
-            border-color: var(--secondary-color);
-            background: #edf2f7;
-            color: var(--secondary-color);
-        }
-
-        .custom-file-input:focus+.custom-file-label {
-            border-color: var(--primary-color);
-            background: #ebf4ff;
-        }
-
-        /* معاينة الصور */
-        [id^="preview_"] {
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%) !important;
-            border: 2px dashed #cbd5e0 !important;
-            border-radius: 10px !important;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        [id^="preview_"]:hover {
-            border-color: var(--secondary-color) !important;
-            background: linear-gradient(135deg, #ebf4ff 0%, #e6fffa 100%) !important;
-        }
-
-        /* أزرار محسنة */
-        .btn {
-            border-radius: 10px;
-            padding: 12px 24px;
-            font-weight: 600;
-            text-transform: none;
-            transition: var(--transition);
-            border: none;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s;
+            z-index: 1000;
         }
 
-        .btn:hover::before {
-            left: 100%;
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-color) !important;
+            display: flex;
+            align-items: center;
         }
 
-        .btn-primary {
-            background: var(--secondary-gradient);
-            color: white;
-            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        .navbar-brand i {
+            color: var(--secondary-color);
+            margin-left: 10px;
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4);
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
-        .btn-success {
-            background: var(--success-gradient);
-            color: white;
-            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
-            font-size: 16px;
-            padding: 15px 30px;
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(72, 187, 120, 0.4);
-        }
-
-        .card-footer {
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-            border-top: none;
-            padding: 25px;
-        }
-
-        /* تحسينات إضافية */
-        .crop-image-btn {
-            background: var(--primary-gradient) !important;
-            border: none;
-            color: white;
-            font-size: 12px;
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: var(--transition);
-        }
-
-        .crop-image-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        }
-
-        /* زر تحليل الجواز */
-        #analyzeBtn {
-            background: var(--success-gradient) !important;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 20px !important;
+        .navbar-nav .nav-link {
+            color: var(--primary-color) !important;
             font-weight: 600;
-            transition: var(--transition);
-            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+            padding: 0.5rem 1rem !important;
+            margin: 0 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
 
-        #analyzeBtn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(72, 187, 120, 0.4);
+        .navbar-nav .nav-link:hover {
+            background: var(--accent-color);
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
         }
 
-        /* اللودر */
-        .loader {
-            border: 4px solid #e2e8f0 !important;
-            border-top: 4px solid var(--primary-color) !important;
-            animation: spin 1s linear infinite;
+        .navbar-toggler {
+            border: none;
+            padding: 0.25rem 0.5rem;
         }
 
-        @keyframes spin {
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        /* Hero Section */
+        .hero-section-modern {
+            background: linear-gradient(135deg, var(--white) 0%, var(--accent-color) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 0 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-title-modern {
+            color: var(--primary-color) !important;
+            font-weight: 900 !important;
+            font-size: clamp(1.5rem, 5vw, 2.7rem) !important;
+            line-height: 1.2 !important;
+            margin-bottom: 1.5rem !important;
+            text-shadow: 0 2px 8px rgba(255, 255, 255, 0.5);
+            animation: heroFadeIn 1.2s cubic-bezier(.4, 2, .6, 1);
+        }
+
+        @keyframes heroFadeIn {
             0% {
-                transform: rotate(0deg);
+                opacity: 0;
+                transform: translateY(40px) scale(0.98);
             }
 
             100% {
-                transform: rotate(360deg);
+                opacity: 1;
+                transform: translateY(0) scale(1);
             }
         }
 
-        .loading-text {
+        .typewriter-wrap {
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        #typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background: var(--secondary-color);
+            margin: 0 2px;
+            border-radius: 2px;
+            vertical-align: -0.1em;
+            animation: blink 0.9s steps(1) infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .gold-underline {
+            width: 80px;
+            height: 5px;
+            background: var(--secondary-color);
+            border-radius: 3px;
+            margin: 12px 0 24px 0;
+            box-shadow: 0 2px 12px rgba(201, 169, 97, 0.3);
+            animation: goldLineIn 1.2s 0.5s cubic-bezier(.4, 2, .6, 1) backwards;
+        }
+
+        @keyframes goldLineIn {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+
+            100% {
+                width: 80px;
+                opacity: 1;
+            }
+        }
+
+        .hero-subtitle-modern {
             color: var(--primary-color) !important;
-            font-weight: 600;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            margin-bottom: 2rem;
+            max-width: 500px;
         }
 
-        /* تحسين الصفوف المرنة للصور */
-        .d-flex.flex-wrap.gap-3 {
-            gap: 20px !important;
+        .hero-buttons-modern {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: flex-start;
         }
 
-        .d-flex.flex-wrap.gap-3>div {
-            min-width: 280px;
+        .hero-btn-primary,
+        .hero-btn-secondary {
+            background: var(--primary-color) !important;
+            color: var(--white) !important;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 32px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(27, 54, 93, 0.3);
         }
 
-        /* رسائل الخطأ */
-        .text-danger {
-            color: #e53e3e !important;
-            font-size: 13px;
-            margin-top: 5px;
-            font-weight: 500;
+        .hero-btn-secondary {
+            background: var(--white) !important;
+            color: var(--primary-color) !important;
+            border: 2px solid var(--primary-color);
         }
 
-        /* تحسين الحاوي الرئيسي */
-        .container-fluid {
-            max-width: 1400px;
+        .hero-btn-primary:hover,
+        .hero-btn-secondary:hover {
+            background: var(--secondary-color) !important;
+            color: var(--white) !important;
+            border-color: var(--secondary-color) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(201, 169, 97, 0.4);
+        }
+
+        .hero-logo-wrapper {
+            background: var(--white) !important;
+            border-radius: 30px;
+            box-shadow: 0 8px 32px rgba(27, 54, 93, 0.1);
+            padding: 20px;
+            border: 3px solid rgba(27, 54, 93, 0.1);
+            animation: floatLogo 3.5s ease-in-out infinite;
+            max-width: 200px;
             margin: 0 auto;
         }
 
-        /* تأثيرات إضافية للتركيز */
-        input:focus,
-        select:focus,
-        textarea:focus {
-            transform: translateY(-1px);
+        @keyframes floatLogo {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
         }
 
-        /* تحسين الخلفية للأقسام */
-        .col-md-8,
-        .col-md-4 {
+        .hero-logo {
+            width: 100%;
+            height: auto;
+            max-width: 150px;
+        }
+
+        /* Services Section */
+        .services-section {
+            background: var(--white);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services-title-modern,
+        .features-title-modern {
+            color: var(--primary-color) !important;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .services-subtitle-modern,
+        .features-subtitle-modern {
+            color: var(--secondary-color);
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .creative-service-card {
+            background: var(--white);
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(27, 54, 93, 0.1);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s cubic-bezier(.4, 2, .6, 1);
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1.5px solid #f2f2f2;
+        }
+
+        .creative-service-card:hover {
+            box-shadow: 0 8px 32px rgba(201, 169, 97, 0.3), 0 2px 8px rgba(27, 54, 93, 0.15);
+            border-color: var(--secondary-color);
+            transform: translateY(-6px) scale(1.02);
+        }
+
+        .creative-service-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            box-shadow: 0 4px 18px rgba(27, 54, 93, 0.1);
+            font-size: 2.3rem;
+            color: var(--primary-color);
+            border: 2px solid rgba(27, 54, 93, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .creative-service-card:hover .creative-service-icon {
+            color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            box-shadow: 0 8px 24px rgba(201, 169, 97, 0.3);
+        }
+
+        .creative-service-title {
+            font-size: clamp(1.1rem, 3vw, 1.35rem);
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .creative-service-description {
+            color: var(--text-light);
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .creative-service-btn {
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 30px;
+            padding: 10px 28px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .creative-service-btn:hover {
+            background: var(--secondary-color);
+            color: var(--white);
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 6px 24px rgba(201, 169, 97, 0.3);
+        }
+
+        /* Features Section */
+        .features-section {
+            background: var(--light-bg);
+            padding: 80px 0;
+        }
+
+        .feature-card-modern {
+            background: var(--white);
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(27, 54, 93, 0.1);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s cubic-bezier(.4, 2, .6, 1);
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: 1.5px solid #f2f2f2;
+        }
+
+        .feature-card-modern:hover {
+            box-shadow: 0 8px 32px rgba(201, 169, 97, 0.3), 0 2px 8px rgba(27, 54, 93, 0.15);
+            border-color: var(--secondary-color);
+            transform: translateY(-6px) scale(1.02);
+        }
+
+        .feature-icon-modern {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            font-size: 2rem;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card-modern:hover .feature-icon-modern {
+            transform: scale(1.1);
+            box-shadow: 0 8px 24px rgba(201, 169, 97, 0.4);
+        }
+
+        .feature-title {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: var(--text-light);
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--light-bg) 0%, var(--white) 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 3rem;
+            color: var(--white);
+            box-shadow: 0 8px 32px rgba(27, 54, 93, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .cta-title {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .cta-subtitle {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            text-align: center;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(27, 54, 93, 0.3);
+            display: inline-flex;
+            align-items: center;
+            margin: 0.5rem;
+        }
+
+        .cta-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(201, 169, 97, 0.4);
+            color: var(--white);
+        }
+
+        .cta-btn-secondary {
+            background: var(--white);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 50px;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            margin: 0.5rem;
+        }
+
+        .cta-btn-secondary:hover {
+            background: var(--secondary-color);
+            color: var(--white);
+            border-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+
+        .footer-brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-brand i {
+            color: var(--secondary-color);
+            margin-left: 10px;
+            font-size: 2rem;
+        }
+
+        .footer-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .footer-title {
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            padding: 0.3rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--secondary-color);
+            padding-right: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--secondary-color);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+
+            .hero-section-modern {
+                padding: 100px 0 50px 0;
+                text-align: center;
+            }
+
+            .hero-buttons-modern {
+                justify-content: center;
+            }
+
+            .hero-logo-wrapper {
+                max-width: 150px;
+                margin-bottom: 2rem;
+            }
+
+            .services-section,
+            .features-section,
+            .cta-section {
+                padding: 60px 0;
+            }
+
+            .creative-service-card,
+            .feature-card-modern {
+                margin-bottom: 2rem;
+                min-height: auto;
+                padding: 1.5rem;
+            }
+
+            .creative-service-icon,
+            .feature-icon-modern {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+            }
+
+            .cta-icon {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
+            }
+
+            .cta-btn-primary,
+            .cta-btn-secondary {
+                display: block;
+                text-align: center;
+                margin: 0.5rem auto;
+                width: fit-content;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-section-modern {
+                padding: 80px 0 40px 0;
+            }
+
+            .hero-logo-wrapper {
+                max-width: 120px;
+            }
+
+            .creative-service-card,
+            .feature-card-modern {
+                padding: 1rem;
+            }
+
+            .creative-service-icon,
+            .feature-icon-modern {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .footer {
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .company-logo {
+            height: 40px;
+            /* ثابت */
+            width: auto;
+            /* يتناسب مع الارتفاع */
+            margin-left: 10px;
+            /* لو محتاج تبعدها شوية */
+        }
+
+        .hero-logo-wrapper {
+            display: flex;
+            justify-content: center;
+            /* يخلي اللوجو في النص أفقي */
+            align-items: center;
+            /* في النص رأسي */
             padding: 10px;
         }
 
-        /* تحسين أيقونات التسميات */
-        label[for="name"]::before {
-            content: "👤 ";
+        .hero-logo {
+            max-height: 80px;
+            /* أقصى ارتفاع */
+            width: auto;
+            /* يحافظ على النسبة */
+            object-fit: contain;
         }
 
-        label[for="job_title_id"]::before {
-            content: "💼 ";
+        .fallback-icon {
+            font-size: 4rem;
+            /* حجم الأيقونة */
+            color: var(--secondary-color);
         }
 
-        label[for="delegate_id"]::before {
-            content: "👨‍💼 ";
+        .hero-logo-wrapper {
+            display: flex;
+            justify-content: center;
+            /* يخلي اللوجو في النص أفقي */
+            align-items: center;
+            /* يخليها في النص رأسي */
+            padding: 20px;
+            max-width: 250px;
+            /* أقصى عرض للـ Wrapper */
+            margin: 0 auto 2rem auto;
+            /* في النص + مسافة تحت */
         }
 
-        label[for="age"]::before {
-            content: "📅 ";
-        }
-
-        label[for="phone"]::before {
-            content: "📱 ";
-        }
-
-        label[for="phone_two"]::before {
-            content: "📞 ";
-        }
-
-        label[for="card_id"]::before {
-            content: "🆔 ";
-        }
-
-        label[for="passport_numder"]::before {
-            content: "📘 ";
-        }
-
-        label[for="test_type"]::before {
-            content: "📝 ";
-        }
-
-        label[for="governorate"]::before {
-            content: "📍 ";
-        }
-
-        label[for="registration_date"]::before {
-            content: "📆 ";
-        }
-
-        label[for="date_of_birth"]::before {
-            content: "🎂 ";
-        }
-
-        /* أيقونات الصور */
-        label[for="image"]::before {
-            content: "📷 ";
-        }
-
-        label[for="passport_photo"]::before {
-            content: "📘 ";
-        }
-
-        label[for="img_national_id_card"]::before {
-            content: "🆔 ";
-        }
-
-        label[for="img_national_id_card_back"]::before {
-            content: "🔄 ";
-        }
-
-        label[for="license_photo"]::before {
-            content: "📜 ";
-        }
-
-        /* تحسين الاستجابة */
-        @media (max-width: 768px) {
-            .card-body {
-                padding: 20px;
-            }
-
-            .d-flex.flex-wrap.gap-3 {
-                flex-direction: column;
-            }
-
-            .d-flex.flex-wrap.gap-3>div {
-                min-width: 100%;
-                flex: none !important;
-            }
-
-            .btn-success {
-                width: 100% !important;
-                padding: 12px 20px;
-                font-size: 14px;
-            }
+        .hero-logo {
+            max-width: 100%;
+            /* ما تتعداش حجم الـ Wrapper */
+            max-height: 150px;
+            /* أقصى ارتفاع للصورة */
+            width: auto;
+            /* يحافظ على النسبة */
+            height: auto;
+            /* علشان ما تتمددش */
+            object-fit: contain;
+            /* يخلي الصورة كاملة من غير قص */
         }
     </style>
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="card card-primary">
-            <div class="card-header bg-secondary">
-                <h3 class="card-title">إضافة عميل جديد</h3>
-            </div>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                @if (App\Models\CompanySetting::first() && App\Models\CompanySetting::first()->logo)
+                    <img src="{{ asset('storage/' . App\Models\CompanySetting::first()->logo) }}" alt="Logo"
+                        class="company-logo">
+                @else
+                    <i class="fas fa-dove"></i>
+                @endif
+                نسر الخليج
+            </a>
 
-            <!-- عرض الأخطاء -->
-            <div id="error-display" style="display: none;">
-                <script>
-                    هنا سيتم عرض الأخطاء من PHP
-                    let errorMessages = `{!! implode('<br>', $errors->all()) !!}`;
-                    if (errorMessages) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'حدثت أخطاء في الإدخال:',
-                            html: errorMessages,
-                            confirmButtonText: 'حسناً'
-                        });
-                    }
-                </script>
-            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars" style="color: var(--primary-color);"></i>
+            </button>
 
-            <form action="{{ route('create.lead') }}" id="add" method="POST" enctype="multipart/form-data">
-                @csrf
-
-                <div class="card-body">
-                    <div class="row">
-                        <!-- الحقول الرئيسية -->
-                        <div class="col-md-8">
-                            <!-- الصورة الشخصية -->
-                            <div class="form-group p-3 mb-4 bg-white rounded border shadow-sm">
-                                <label for="image">الصورة الشخصية</label>
-
-                                <div class="custom-file mb-2">
-                                    <input type="file" name="image" class="custom-file-input preview-image-input"
-                                        data-preview="#preview_image" id="dd" required>
-                                    <label class="custom-file-label">اختر صورة</label>
-                                </div>
-
-                                <div id="preview_image" class="border rounded p-2 text-center bg-light"
-                                    style="min-height: 130px;">
-                                    <img src="https://via.placeholder.com/100x100?text=No+Image" class="img-thumbnail"
-                                        style="max-width: 100px; display: none;" alt="Preview">
-                                </div>
-                                <button type="button" class="btn btn-primary btn-sm mt-2 crop-image-btn"
-                                    data-input="#dd" data-preview="#preview_image">
-                                    اقتصاص
-                                </button>
-                            </div>
-
-                            <!-- باقي الحقول -->
-                            <div class="row">
-                                <div class="form-group col-md-12">
-                                    <label for="name">اسم العميل</label>
-                                    <input type="text" name="name" id="name" class="form-control"
-                                        placeholder="أدخل اسم العميل" required value="">
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label for="job_title_id">الوظيفة المقدم عليها</label>
-                                    <select name="job_title_id" id="job_title_id" class="form-control" required>
-                                        <option value="">اختر الوظيفة</option>
-                                        @foreach ($jobs as $job)
-                                            <option value="{{ $job->id }}"
-                                                {{ old('job_title_id') == $job->id ? 'selected' : '' }}>
-                                                {{ $job->title }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label for="delegate_id">المندوب</label>
-                                    <select name="delegate_id" id="delegate_id" class="form-control" required>
-                                        <option value="">اختر المندوب</option>
-                                        @foreach ($delegates as $delegate)
-                                            <option value="{{ $delegate->id }}"
-                                                {{ old('delegate_id') == $delegate->id ? 'selected' : '' }}>
-                                                {{ $delegate->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-md-4">
-                                    <label for="age">السن</label>
-                                    <input type="text" name="age" id="age" class="form-control" required
-                                        placeholder="أدخل السن" value="">
-                                </div>
-
-                                <div class="form-group col-md-4">
-                                    <label for="phone">رقم الهاتف</label>
-                                    <input type="text" name="phone" id="phone" class="form-control"
-                                        required placeholder="أدخل رقم الهاتف" value="{{ old('phone') }}"
-                                        pattern="\d{11}" title="يجب أن يكون رقم الهاتف مكونًا من 11 رقمًا">
-                                    <div id="phone-error" class="text-danger"></div>
-                                    @if ($errors->has('phone'))
-                                        <div class="text-danger">
-                                            {{ $errors->first('phone') }}
-                                        </div>
-                                    @endif
-                                </div>
-
-                                <div class="form-group col-md-4">
-                                    <label for="phone_two">رقم هاتف آخر</label>
-                                    <input type="text" name="phone_two" id="phone_two" class="form-control"
-                                        placeholder="أدخل رقم الهاتف الآخر" value="">
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label for="card_id">الرقم القومي</label>
-                                    <input type="text" name="card_id" id="card_id" class="form-control"
-                                        required placeholder="أدخل الرقم القومي" value="{{ old('card_id') }}"
-                                        pattern="\d{14}" maxlength="14"
-                                        title="يجب أن يكون الرقم القومي مكونًا من 14 رقمًا"
-                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-                                    <div id="card-error" class="text-danger"></div>
-                                    @if ($errors->has('card_id'))
-                                        <div class="text-danger">
-                                            {{ $errors->first('card_id') }}
-                                        </div>
-                                    @endif
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label for="passport_numder">رقم الجواز</label>
-                                    <input type="text" name="passport_numder" id="passport_numder"
-                                        class="form-control" required placeholder="ادخل رقم الجواز" value="">
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label for="test_type">نوع الاختبار</label>
-                                    <select name="test_type" id="test_type" class="form-control" required>
-                                        <option value="">اختر النوع</option>
-                                        <option value="اول اختبار">اول اختبار</option>
-                                        <option value="اعادة اختبار">اعادة اختبار</option>
-                                        <option value="قيادة امنة">قيادة امنة</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label for="governorate">المحافظة</label>
-                                    <select name="governorate" id="governorate" class="form-control" required>
-                                        <option value="">اختر المحافظة</option>
-                                        @foreach ($governorates as $gov)
-                                            <option value="{{ $gov }}"
-                                                {{ old('governorate') == $gov ? 'selected' : '' }}>{{ $gov }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label for="registration_date">موعد التسجيل</label>
-                                    <input type="date" name="registration_date" id="registration_date"
-                                        class="form-control" value="{{ date('Y-m-d') }}" required>
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label for="date_of_birth">تاريخ الميلاد</label>
-                                    <input id="date_of_birth" type="date" name="date_of_birth"
-                                        class="form-control" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group col-md-12 mt-3" id="job-questions-container">
-                                <!-- هنا هتظهر الأسئلة -->
-                            </div>
-                        </div>
-
-                        <!-- صور -->
-                        <div class="col-md-4">
-                            <!-- صورة جواز السفر -->
-                            <div class="form-group p-3 mb-4 bg-white rounded border shadow-sm">
-                                <label for="passport_photo">صورة جواز السفر</label>
-
-                                <div class="custom-file mb-2">
-                                    <input type="file" name="passport_photo"
-                                        class="custom-file-input preview-image-input"
-                                        data-preview="#preview_passport_photo" id="passportInput" required>
-                                    <label class="custom-file-label">اختر صورة</label>
-                                </div>
-
-                                <div id="preview_passport_photo" class="border rounded p-2 text-center bg-light"
-                                    style="min-height: 130px;">
-                                    <img src="https://via.placeholder.com/100x100?text=No+Image" class="img-thumbnail"
-                                        style="max-width: 100px; display: none;" alt="Preview">
-                                </div>
-
-
-                                <div class="mt-3 d-flex align-items-center gap-3  justify-content-between">
-
-                                    <div>
-                                        <button type="button" id="analyzeBtn" class="btn btn-primary">
-                                            فك البيانات
-                                        </button>
-                                    </div>
-
-                                    <!-- Loader -->
-                                    <div id="loader_container" class="d-flex align-items-center gap-2"
-                                        style="display: none;">
-                                        <div id="passportInput_loader" class="spinner-border text-primary"
-                                            role="status"
-                                            style="width: 24px; height: 24px;margin-left: 14px; display: none;">
-                                        </div>
-                                        <div id="passportInput_loader_text" class="loading-text text-primary"
-                                            style="font-size: 14px; display: none;">
-                                            الرجاء الانتظار...
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <button type="button" class="btn btn-primary btn-sm mt-2 crop-image-btn"
-                                            data-input="#passportInput" data-preview="#preview_passport_photo">
-                                            اقتصاص
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <!-- صور البطاقة الشخصية (جنباً إلى جنب) -->
-                            <div class="d-flex flex-wrap gap-3">
-                                <!-- بطاقة الرقم القومي من الأمام -->
-                                <div class="form-group p-3 mb-4 bg-white rounded border shadow-sm"
-                                    style="flex: 1 1 48%;">
-                                    <label for="img_national_id_card">بطاقة الرقم القومي من الامام</label>
-
-                                    <div class="custom-file mb-2">
-                                        <input type="file" name="img_national_id_card"
-                                            class="custom-file-input preview-image-input"
-                                            data-preview="#preview_img_national_id_card" id="ss" required>
-                                        <label class="custom-file-label">اختر صورة</label>
-                                    </div>
-
-                                    <div id="preview_img_national_id_card"
-                                        class="border rounded p-2 text-center bg-light" style="min-height: 130px;">
-                                        <img src="https://via.placeholder.com/100x100?text=No+Image"
-                                            class="img-thumbnail" style="max-width: 100px; display: none;"
-                                            alt="Preview">
-                                    </div>
-                                    <button type="button" class="btn btn-primary btn-sm mt-2 crop-image-btn"
-                                        data-input="#ss" data-preview="#preview_img_national_id_card">
-                                        اقتصاص
-                                    </button>
-                                </div>
-
-                                <!-- بطاقة الرقم القومي من الخلف -->
-                                <div class="form-group p-3 mb-4 bg-white rounded border shadow-sm"
-                                    style="flex: 1 1 48%;">
-                                    <label for="img_national_id_card_back">بطاقة الرقم القومي من الخلف</label>
-
-                                    <div class="custom-file mb-2">
-                                        <input type="file" name="img_national_id_card_back"
-                                            class="custom-file-input preview-image-input"
-                                            data-preview="#preview_img_national_id_card_back" id="aa" required>
-                                        <label class="custom-file-label">اختر صورة</label>
-                                    </div>
-
-                                    <div id="preview_img_national_id_card_back"
-                                        class="border rounded p-2 text-center bg-light" style="min-height: 130px;">
-                                        <img src="https://via.placeholder.com/100x100?text=No+Image"
-                                            class="img-thumbnail" style="max-width: 100px; display: none;"
-                                            alt="Preview">
-                                    </div>
-                                    <button type="button" class="btn btn-primary btn-sm mt-2 crop-image-btn"
-                                        data-input="#aa" data-preview="#preview_img_national_id_card_back">
-                                        اقتصاص
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- إثبات مهنة -->
-                            <div class="form-group p-3 mb-4 bg-white rounded border shadow-sm">
-                                <label for="license_photo">اثبات مهنة (رخصة او شهادة)</label>
-
-                                <div class="custom-file mb-2">
-                                    <input type="file" name="license_photo"
-                                        class="custom-file-input preview-image-input"
-                                        data-preview="#preview_license_photo" id="ff" required>
-                                    <label class="custom-file-label">اختر صورة</label>
-                                </div>
-
-                                <div id="preview_license_photo" class="border rounded p-2 text-center bg-light"
-                                    style="min-height: 130px;">
-                                    <img src="https://via.placeholder.com/100x100?text=No+Image" class="img-thumbnail"
-                                        style="max-width: 100px; display: none;" alt="Preview">
-                                </div>
-                                <button type="button" class="btn btn-primary btn-sm mt-2 crop-image-btn"
-                                    data-input="#ff" data-preview="#preview_license_photo">
-                                    اقتصاص
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-footer text-center">
-                    <button type="submit" id="submitBtn" class="btn btn-success" style="width: 250px">
-                        <i class="fas fa-plus-circle"></i> إضافة (f2)
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-    {{-- تعديل الصور --}}
-    <!-- نافذة الاقتصاص -->
-    <div class="modal fade" id="cropperModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 70vw; height: 70vh;">
-            <div class="modal-content" style="height: 100%;">
-
-                <div class="modal-header">
-                    <h5 class="modal-title">اقتصاص الصورة</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
-                </div>
-
-                <!-- جسم المودال (الصورة تاخد كل المساحة المتاحة) -->
-                <div class="modal-body bg-dark p-0" style="height: calc(100% - 120px);">
-                    <div class="w-100 h-100">
-                        <img id="cropperImage" style="width:100%; height:100%; object-fit:contain; display:block;">
-                    </div>
-                </div>
-
-                <div class="modal-footer d-flex justify-content-between">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-secondary" id="zoomIn">تكبير +</button>
-                        <button type="button" class="btn btn-secondary" id="zoomOut">تصغير -</button>
-                        <button type="button" class="btn btn-secondary" id="rotateLeft">↺ تدوير</button>
-                        <button type="button" class="btn btn-secondary" id="reset">إعادة ضبط</button>
-                    </div>
-                    <button type="button" id="cropConfirm" class="btn btn-success">تأكيد الاقتصاص</button>
-                </div>
-
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">خدماتنا</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">مميزاتنا</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#jobs">الوظائف</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">تواصل معنا</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
-    {{-- swal اتمام الحفظ --}}
-    @if (session()->has('success'))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'تمت الإضافة بنجاح!',
-                text: @json(session('success')),
-                confirmButtonText: 'حسناً'
-            });
-        </script>
-    @endif
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- jQuery & DataTables JS -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <!-- DataTables Buttons -->
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.6.2/dist/cropper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </nav>
 
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section-modern">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-lg-6 order-2 order-lg-1">
+                    <h1 class="hero-title-modern">
+                        <span class="typewriter-wrap">
+                            <span id="typewriter"></span>
+                            <span id="typewriter-cursor">|</span>
+                        </span>
+                    </h1>
+                    <div class="gold-underline"></div>
+                    <p class="hero-subtitle-modern">
+                        نحلق بأحلامكم عالياً ونربط المواهب المصرية بأفضل الفرص الوظيفية في دول الخليج والعالم مع ضمان
+                        الجودة والمصداقية
+                    </p>
+                    <div class="hero-buttons-modern">
+                        <a href="{{ route('sign') }}" class="hero-btn-primary">
+                            <i class="fas fa-rocket me-2"></i>
+                            سجل معنا
+                        </a>
+                        <a href="#about" class="hero-btn-secondary">
+                            <i class="fas fa-info-circle me-2"></i>
+                            اكتشف خدماتنا
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 order-1 order-lg-2 text-center">
+                    <div class="hero-logo-wrapper">
+                        @if (App\Models\CompanySetting::first() && App\Models\CompanySetting::first()->logo)
+                            <img src="{{ asset('storage/' . App\Models\CompanySetting::first()->logo) }}" alt="Logo"
+                                class="hero-logo">
+                        @else
+                            <i class="fas fa-dove fallback-icon"></i>
+                        @endif
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="services-title-modern">خدماتنا لإلحاق العمالة بالخارج</h2>
+                <p class="services-subtitle-modern">
+                    نقدم مجموعة متكاملة من الخدمات لتسهيل إلحاق العمالة المصرية بالوظائف الخارجية المناسبة
+                </p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="creative-service-card h-100">
+                        <div class="creative-service-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h4 class="creative-service-title">فرص عمل بالخارج</h4>
+                        <p class="creative-service-description">
+                            انطلق نحو مستقبلك المهني. وظائف حقيقية في شركات موثوقة حول العالم ودول الخليج
+                        </p>
+                        <a href="#jobs" class="creative-service-btn">
+                            <i class="fas fa-search me-2"></i>
+                            استكشف الوظائف
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="creative-service-card h-100">
+                        <div class="creative-service-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <h4 class="creative-service-title">تسجيل العمالة المصرية</h4>
+                        <p class="creative-service-description">
+                            سجّل بياناتك معنا وكن أول من يحصل على أفضل الفرص الوظيفية بالخارج
+                        </p>
+                        <a href="#register" class="creative-service-btn">
+                            <i class="fas fa-user-edit me-2"></i>
+                            سجّل الآن
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="creative-service-card h-100">
+                        <div class="creative-service-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h4 class="creative-service-title">خدمات الشركات</h4>
+                        <p class="creative-service-description">
+                            نساعد الشركات في العثور على أفضل الكفاءات المصرية المتخصصة
+                        </p>
+                        <a href="#companies" class="creative-service-btn">
+                            <i class="fas fa-handshake me-2"></i>
+                            للشركات
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="creative-service-card h-100">
+                        <div class="creative-service-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4 class="creative-service-title">الدول المتاحة</h4>
+                        <p class="creative-service-description">
+                            اختر وجهتك بثقة. فرص عمل في دول الخليج وأبرز الدول حول العالم
+                        </p>
+                        <a href="#countries" class="creative-service-btn">
+                            <i class="fas fa-map me-2"></i>
+                            الوجهات المتاحة
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="creative-service-card h-100">
+                        <div class="creative-service-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h4 class="creative-service-title">إرشادات ونصائح</h4>
+                        <p class="creative-service-description">
+                            نصائح ذهبية وإرشادات مهمة للنجاح في العمل بالخارج وتجنب المشاكل
+                        </p>
+                        <a href="#tips" class="creative-service-btn">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            اقرأ النصائح
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="creative-service-card h-100">
+                        <div class="creative-service-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4 class="creative-service-title">دعم واستشارات</h4>
+                        <p class="creative-service-description">
+                            دعم فوري واستشارات مجانية. معك في كل خطوة نحو تحقيق حلمك
+                        </p>
+                        <a href="#contact" class="creative-service-btn">
+                            <i class="fas fa-phone me-2"></i>
+                            تواصل معنا
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="features-title-modern">
+                    <i class="fas fa-star me-3" style="color: var(--secondary-color);"></i>
+                    لماذا تختار نسر الخليج؟
+                </h2>
+                <p class="features-subtitle-modern">
+                    نتميز بالجودة والسرعة والأمان لضمان تجربة موثوقة للعمالة المصرية والشركات الخارجية
+                </p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="feature-card-modern h-100">
+                        <div class="feature-icon-modern">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4 class="feature-title">أمان تام للبيانات</h4>
+                        <p class="feature-description">
+                            نحافظ على سرية بياناتك ونستخدم أحدث تقنيات الحماية والتشفير المتقدمة
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="feature-card-modern h-100">
+                        <div class="feature-icon-modern">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h4 class="feature-title">سرعة في الإجراءات</h4>
+                        <p class="feature-description">
+                            ننجز معاملاتك بسرعة وكفاءة عالية لتسهيل سفرك للعمل بالخارج في أقل وقت
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="feature-card-modern h-100">
+                        <div class="feature-icon-modern">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4 class="feature-title">دعم فني متميز</h4>
+                        <p class="feature-description">
+                            فريق دعم متخصص متواجد على مدار الساعة لمساعدتك في كل خطوة
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="feature-card-modern h-100">
+                        <div class="feature-icon-modern">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h4 class="feature-title">أسعار تنافسية</h4>
+                        <p class="feature-description">
+                            نقدم خدماتنا بأفضل الأسعار في السوق وبدون أي رسوم خفية
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="feature-card-modern h-100">
+                        <div class="feature-icon-modern">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4 class="feature-title">فريق متخصص</h4>
+                        <p class="feature-description">
+                            خبراء في مجال التوظيف الدولي وإلحاق العمالة بدول الخليج والعالم
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="feature-card-modern h-100">
+                        <div class="feature-icon-modern">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h4 class="feature-title">مصداقية وموثوقية</h4>
+                        <p class="feature-description">
+                            سجل حافل بالنجاحات وآلاف العملاء الراضين عن خدماتنا المتميزة
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="jobs" class="cta-section">
+        <div class="container">
+            <div class="text-center">
+                <div class="cta-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+
+                <h2 class="cta-title">هل تبحث عن فرصة عمل بالخارج؟</h2>
+
+                <p class="cta-subtitle">
+                    سجل بياناتك أو تواصل معنا الآن لتحصل على أفضل الفرص مع ضمان المصداقية والسرعة في الإجراءات
+                </p>
+
+                <div class="d-flex flex-wrap justify-content-center">
+                    <a href="#contact" class="cta-btn-primary">
+                        <i class="fas fa-phone me-2"></i>
+                        تواصل معنا الآن
+                    </a>
+                    <a href="https://wa.me/201000000000" class="cta-btn-secondary" target="_blank">
+                        <i class="fab fa-whatsapp me-2"></i>
+                        واتساب
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="footer-brand">
+                        @if (App\Models\CompanySetting::first() && App\Models\CompanySetting::first()->logo)
+                            <img src="{{ asset('storage/' . App\Models\CompanySetting::first()->logo) }}"
+                                alt="Logo" class="company-logo">
+                        @else
+                            <i class="fas fa-dove"></i>
+                        @endif
+                        نسر الخليج
+                    </div>
+                    <p class="footer-description">
+                        شركة رائدة في مجال إلحاق العمالة المصرية بالخارج، نحلق بأحلامكم عالياً ونربط المواهب بأفضل الفرص
+                        الوظيفية في دول الخليج والعالم.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-2">
+                    <h5 class="footer-title">روابط سريعة</h5>
+                    <a href="#home" class="footer-link">الرئيسية</a>
+                    <a href="#services" class="footer-link">خدماتنا</a>
+                    <a href="#features" class="footer-link">مميزاتنا</a>
+                    <a href="#jobs" class="footer-link">الوظائف</a>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3">
+                    <h5 class="footer-title">خدماتنا</h5>
+                    <a href="#" class="footer-link">فرص عمل بالخليج</a>
+                    <a href="#" class="footer-link">تسجيل العمالة</a>
+                    <a href="#" class="footer-link">خدمات الشركات</a>
+                    <a href="#" class="footer-link">استشارات مجانية</a>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3">
+                    <h5 class="footer-title">تواصل معنا</h5>
+                    <div class="footer-link">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        القاهرة، مصر
+                    </div>
+                    <div class="footer-link">
+                        <i class="fas fa-phone me-2"></i>
+                        +20 100 000 0000
+                    </div>
+                    <div class="footer-link">
+                        <i class="fas fa-envelope me-2"></i>
+                        info@nasrgulf.com
+                    </div>
+                    <div class="footer-link">
+                        <i class="fab fa-whatsapp me-2"></i>
+                        واتساب: +20 100 000 0000
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 نسر الخليج. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Typewriter Effect Script -->
     <script>
-        // هنا يمكن إضافة أي JavaScript مطلوب للصفحة
-        // مثل معاينة الصور، التحقق من صحة البيانات، إلخ
+        const typewriterTexts = [
+            'نحلق بأحلامكم عالياً',
+            'بوابتكم لسوق العمل الخليجي',
+            'نسر الخليج... رحلتكم للنجاح تبدأ هنا'
+        ];
 
-        // مثال لمعاينة الصور
-        $(document).on('change', '.preview-image-input', function() {
-            var input = this;
-            var previewId = $(this).data('preview');
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 80;
+        let pauseAfterTyping = 1500;
+        let pauseAfterDeleting = 500;
 
-            if (input.files && input.files[0]) {
-                var reader = new FileReader
-                reader.onload = function(e) {
-                    var img = $(previewId).find('img');
-                    img.attr('src', e.target.result);
-                    img.show();
+        function typeWriterEffect() {
+            const typewriterElement = document.getElementById('typewriter');
+            const cursor = document.getElementById('typewriter-cursor');
+
+            if (!typewriterElement || !cursor) return;
+
+            const currentText = typewriterTexts[textIndex];
+
+            if (!isDeleting) {
+                typewriterElement.textContent = currentText.slice(0, charIndex + 1);
+                charIndex++;
+
+                if (charIndex === currentText.length) {
+                    isDeleting = true;
+                    setTimeout(typeWriterEffect, pauseAfterTyping);
+                } else {
+                    setTimeout(typeWriterEffect, typingSpeed);
                 }
-                reader.readAsDataURL(input.files[0]);
-            }
-        });
-    </script>
-    {{-- قص الصورة --}}
-    <script>
-        let cropper;
-        let currentInputFile = null;
-        let currentPreviewId = null;
-        const cropperModal = document.getElementById("cropperModal");
-        const cropperImage = document.getElementById("cropperImage");
+            } else {
+                typewriterElement.textContent = currentText.slice(0, charIndex - 1);
+                charIndex--;
 
-        // اختيار صورة
-        document.querySelectorAll(".crop-image-btn").forEach(btn => {
-            btn.addEventListener("click", function() {
-                const inputSelector = this.getAttribute("data-input");
-                const previewSelector = this.getAttribute("data-preview");
-
-                currentInputFile = document.querySelector(inputSelector);
-                currentPreviewId = previewSelector;
-
-                if (!currentInputFile.files[0]) {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'تنبيه',
-                        text: 'اختر صورة أولاً قبل الاقتصاص!',
-                        confirmButtonText: 'حسناً'
-                    });
-                    return;
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    textIndex = (textIndex + 1) % typewriterTexts.length;
+                    setTimeout(typeWriterEffect, pauseAfterDeleting);
+                } else {
+                    setTimeout(typeWriterEffect, typingSpeed / 2);
                 }
-
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    cropperImage.src = event.target.result;
-
-                    // فتح المودال
-                    const modal = new bootstrap.Modal(cropperModal);
-                    modal.show();
-                };
-                reader.readAsDataURL(currentInputFile.files[0]);
-            });
-        });
-
-
-        // بعد ما المودال يظهر فعليًا
-        cropperModal.addEventListener("shown.bs.modal", function() {
-            if (cropper) cropper.destroy();
-
-            cropper = new Cropper(cropperImage, {
-                aspectRatio: NaN,
-                viewMode: 1,
-                autoCropArea: 1,
-                responsive: true,
-                background: false,
-                ready() {
-                    // نخلي الصورة تملأ المساحة من أول مرة
-                    const containerData = cropper.getContainerData();
-                    const imageData = cropper.getImageData();
-
-                    let scaleX = containerData.width / imageData.width;
-                    let scaleY = containerData.height / imageData.height;
-                    let scale = Math.min(scaleX, scaleY);
-
-                    cropper.zoomTo(scale);
-                }
-            });
-        });
-
-        // زر تأكيد الاقتصاص
-        document.getElementById("cropConfirm").addEventListener("click", function() {
-            if (cropper && currentPreviewId && currentInputFile) {
-                cropper.getCroppedCanvas({
-                    width: 400,
-                    height: 400
-                }).toBlob(function(blob) {
-                    const file = new File([blob], "cropped.jpg", {
-                        type: "image/jpeg"
-                    });
-
-                    // نغير ملف input نفسه
-                    const dataTransfer = new DataTransfer();
-                    dataTransfer.items.add(file);
-                    currentInputFile.files = dataTransfer.files;
-
-                    // نعرض الصورة في preview
-                    const previewDiv = document.querySelector(currentPreviewId + " img");
-                    previewDiv.src = URL.createObjectURL(file);
-                    previewDiv.style.display = "block";
-
-                    // إغلاق المودال
-                    const modal = bootstrap.Modal.getInstance(cropperModal);
-                    modal.hide();
-                }, "image/jpeg");
             }
-        });
-
-        // أدوات التحكم
-        document.getElementById("zoomIn").addEventListener("click", function() {
-            if (cropper) cropper.zoom(0.1);
-        });
-
-        document.getElementById("zoomOut").addEventListener("click", function() {
-            if (cropper) cropper.zoom(-0.1);
-        });
-
-        document.getElementById("rotateLeft").addEventListener("click", function() {
-            if (cropper) cropper.rotate(-90);
-        });
-
-        document.getElementById("reset").addEventListener("click", function() {
-            if (cropper) {
-                cropper.reset();
-
-                // نخلي الصورة تملأ تاني
-                const containerData = cropper.getContainerData();
-                const imageData = cropper.getImageData();
-
-                let scaleX = containerData.width / imageData.width;
-                let scaleY = containerData.height / imageData.height;
-                let scale = Math.min(scaleX, scaleY);
-
-                cropper.zoomTo(scale);
-            }
-        });
-    </script>
-    <script type="module">
-        function calculateAge(dateOfBirthStr) {
-            // تحويل التاريخ إلى أجزاء
-            const [day, month, year] = dateOfBirthStr.split('/').map(Number);
-            const birthDate = new Date(year, month - 1, day);
-            const today = new Date();
-
-            let age = today.getFullYear() - birthDate.getFullYear();
-
-            // لو لسه ما جاش تاريخ الميلاد في السنة الحالية
-            const hasBirthdayPassedThisYear =
-                today.getMonth() > birthDate.getMonth() ||
-                (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
-
-            if (!hasBirthdayPassedThisYear) {
-                age--;
-            }
-
-            return age;
         }
 
-        import {
-            GoogleGenerativeAI
-        } from "https://esm.sh/@google/generative-ai";
-
-        const genAI = new GoogleGenerativeAI("AIzaSyDjk68-pr2IRQ5oJOb6AkAZe219EpJAHh4");
-
-        async function fileToBase64(file) {
-            const buffer = await file.arrayBuffer();
-            const bytes = new Uint8Array(buffer);
-            let binary = "";
-            bytes.forEach((b) => binary += String.fromCharCode(b));
-            return btoa(binary);
-        }
-
-        document.getElementById("analyzeBtn").addEventListener("click", async () => {
-            document.getElementById("passportInput_loader").style.display = "block";
-            document.getElementById("passportInput_loader_text").style.display = "block";
-            const fileInput = document.getElementById("passportInput");
-            const file = fileInput.files[0];
-            const resultBox = document.getElementById("resultBox");
-
-            if (!file) {
-                Swal.fire({
-                    title: "اختر صورة جواز السفر اولا",
-                    icon: "error",
-                    draggable: true
-                });
-                document.getElementById("passportInput_loader").style.display = "none";
-                document.getElementById("passportInput_loader_text").style.display = "none";
-                return;
-            }
-
-            try {
-                const base64Image = await fileToBase64(file);
-                const model = genAI.getGenerativeModel({
-                    model: "gemini-2.0-flash"
-                });
-                const prompt = `"Extract all information from the passport image with high accuracy, ensuring no errors, and present the output as a JSON object. The JSON should include the following keys:
-
-                    passport_no
-
-                    type
-
-                    country_code
-
-                    full_name_english
-
-                    full_name_arabic (ensure 'ماهر' is one word, e.g., 'ماهر محمد عبدالعزيز مرسي')
-
-                    date_of_birth
-
-                    place_of_birth (must be one of: 'القاهرة', 'الجيزة', 'الأسكندرية', 'الدقهلية', 'البحر الأحمر', 'البحيرة', 'الفيوم', 'الغربية', 'الإسماعيلية', 'المنوفية', 'المنيا', 'القليوبية', 'الوادي الجديد', 'السويس', 'أسوان', 'أسيوط', 'بني سويف', 'بورسعيد', 'دمياط', 'الشرقية', 'جنوب سيناء', 'كفر الشيخ', 'مطروح', 'الأقصر', 'قنا', 'شمال سيناء', 'سوهاج','السعودية', 'القدس', 'الأردن', 'العراق', 'لبنان', 'فلسطين', 'اليمن', 'عمان', 'الإمارات العربية المتحدة', 'الكويت', 'قطر', 'البحرين')
-
-                    nationality
-
-                    sex
-
-                    date_of_issue
-
-                    date_of_expiry
-
-                    issuing_office
-
-                    national_id (should be in Western/English numerals, e.g., '28101191800397')
-
-                    profession
-
-                    mrz_lines (an array containing each line of the Machine Readable Zone)
-
-                    Example of desired JSON structure:
-
-                    JSON
-
-                    {
-                    "passport_no": "VALUE",
-                    "type": "VALUE",
-                    "country_code": "VALUE",
-                    "full_name_english": "VALUE",
-                    "full_name_arabic": "VALUE",
-                    "date_of_birth": "VALUE",
-                    "place_of_birth": "VALUE_FROM_LIST",
-                    "nationality": "VALUE",
-                    "sex": "VALUE",
-                    "date_of_issue": "VALUE",
-                    "date_of_expiry": "VALUE",
-                    "issuing_office": "VALUE",
-                    "national_id": "VALUE_IN_ENGLISH_NUMERALS",
-                    "profession": "VALUE",
-                    "mrz_lines": [
-                        "VALUE_LINE_1",
-                        "VALUE_LINE_2"
-                    ]
-                    }
-                    "`;
-
-                const result = await model.generateContent({
-                    contents: [{
-                        role: "user",
-                        parts: [{
-                                inlineData: {
-                                    mimeType: file.type,
-                                    data: base64Image,
-                                },
-                            },
-                            {
-                                text: prompt
-                            },
-                        ],
-                    }, ],
-                });
-                let text = await result.response.text();
-
-                // تنظيف النص من Markdown إن وجد
-                text = text.trim();
-                if (text.startsWith("```json")) {
-                text = text.replace(/^```json/, '').replace(/```$/, '').trim();
-
-                try {
-                    // تحويل النص إلى كائن JSON
-                    const data = JSON.parse(text);
-
-                    // التحقق من وجود full_mrz في الكائن
-                    if (data.passport_type !== 'null') {
-                        document.getElementById("name").value = data.full_name_arabic;
-                        document.getElementById("card_id").value = data.national_id;
-                        document.getElementById("age").value = calculateAge(data.date_of_birth);
-                        document.getElementById("passport_numder").value = data.passport_no;
-                        if (data.date_of_birth) {
-                            let parts = data.date_of_birth.split('/');
-                            if (parts.length === 3) {
-                                let formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
-                                    document.getElementById("date_of_birth").value = formattedDate;
-                                }
-                            }
-                            const govSelect = document.getElementById('governorate');
-                            if (data.place_of_birth) {
-                                const valueToSelect = data.place_of_birth.trim();
-                                for (let option of govSelect.options) {
-                                    if (option.value.trim() === valueToSelect) {
-                                        option.selected = true;
-                                        break;
-                                    }
-                                }
-                            }
-                            document.getElementById("passportInput_loader").style.display = "none";
-                            document.getElementById("passportInput_loader_text").style.display = "none";
-                            $.post("{{ route('check.card') }}", {
-                                _token: "{{ csrf_token() }}",
-                                card_id: data.national_id
-                            }, function(data) {
-                                if (data.exists) {
-                                    $("#card-error").text("⚠️ الرقم القومي مسجل من قبل!");
-                                } else {
-                                    $("#card-error").text("");
-                                }
-                            });
-
-                        } else {
-                            Swal.fire({
-                                title: "الصورة غير واضحة!",
-                                icon: "error",
-                                draggable: true
-                            });
-                            document.getElementById("passportInput_loader").style.display = "none";
-                            document.getElementById("passportInput_loader_text").style.display = "none";
-                        }
-
-                        console.log(data);
-                    } catch (error) {
-                        Swal.fire({
-                            title: "الصورة غير واضحة!",
-                            icon: "error",
-                            draggable: true
-                        });
-                        document.getElementById("passportInput_loader").style.display = "none";
-                        document.getElementById("passportInput_loader_text").style.display = "none";
-                        console.error("Error parsing JSON:", error);
-                    }
-                }
-                console.log(text)
-            } catch (error) {
-                document.getElementById("passportInput_loader").style.display = "none";
-                document.getElementById("passportInput_loader_text").style.display = "none";
-                console.error("❌ Error:", error);
-                alert("حدث خطأ أثناء تحليل الصورة");
-            }
-        });
-    </script>
-    <script>
-        // التحقق من رقم الهاتف
-        $(document).on("blur", "#phone", function() {
-            let phone = $(this).val();
-            if (phone.length === 11) {
-                $.post("{{ route('check.phone') }}", {
-                    _token: "{{ csrf_token() }}",
-                    phone: phone
-                }, function(data) {
-                    if (data.exists) {
-                        $("#phone-error").text("⚠️ رقم الهاتف مسجل من قبل!");
-                    } else {
-                        $("#phone-error").text("");
-                    }
-                });
-            }
-        });
-
-        // التحقق من الرقم القومي أثناء الكتابة
-        $(document).on("input", "#card_id", function() {
-            let card_id = $(this).val();
-            if (card_id.length === 14) {
-                $.post("{{ route('check.card') }}", {
-                    _token: "{{ csrf_token() }}",
-                    card_id: card_id
-                }, function(data) {
-                    if (data.exists) {
-                        $("#card-error").text("⚠️ الرقم القومي مسجل من قبل!");
-                    } else {
-                        $("#card-error").text("");
-                    }
-                });
-            }
-        });
-    </script>
-    <script>
+        // Start typewriter effect when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            const jobSelect = document.querySelector('select[name="job_title_id"]');
-            const questionsContainer = document.getElementById('job-questions-container');
+            setTimeout(typeWriterEffect, 1000);
+        });
 
-            jobSelect.addEventListener('change', function() {
-                const jobId = this.value;
-                questionsContainer.innerHTML = ''; // تنظيف الحقول
-
-                if (jobId) {
-                    let url = "{{ route('job.questions', ':id') }}";
-                    url = url.replace(':id', jobId);
-                    fetch(url)
-                        .then(res => res.json())
-                        .then(data => {
-                            if (data.status && data.questions.length > 0) {
-                                data.questions.forEach(q => {
-                                    let field = '';
-
-                                    switch (q.type) {
-                                        case 'text':
-                                            field = `
-            <input type="text" 
-                   name="questions[${q.id}]" 
-                   class="form-control" 
-                   placeholder="أدخل الإجابة"  />`;
-                                            break;
-
-                                        case 'textarea':
-                                            field = `
-            <textarea name="questions[${q.id}]" 
-                      class="form-control" 
-                      rows="3" 
-                      placeholder="أدخل الإجابة" ></textarea>`;
-                                            break;
-
-                                        case 'number':
-                                            field = `
-            <input type="number" 
-                   name="questions[${q.id}]" 
-                   class="form-control" 
-                   placeholder="أدخل رقم" />`;
-                                            break;
-
-                                        case 'date':
-                                            field = `
-            <input type="date" 
-                   name="questions[${q.id}]" 
-                   class="form-control" />`;
-                                            break;
-
-                                        case 'select':
-                                            if (q.options) {
-                                                let opts = JSON.parse(q.options)
-                                                    .map(opt =>
-                                                        `<option value="${opt}">${opt}</option>`
-                                                    )
-                                                    .join('');
-                                                field = `
-                <select name="questions[${q.id}]" class="form-control">
-                    <option value="">-- اختر --</option>
-                    ${opts}
-                </select>`;
-                                            }
-                                            break;
-
-                                        case 'radio':
-                                            if (q.options) {
-                                                let radios = JSON.parse(q.options)
-                                                    .map(opt => `
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" 
-                           name="questions[${q.id}]" 
-                           value="${opt}">
-                    <label class="form-check-label">${opt}</label>
-                </div>
-            `).join('');
-                                                field =
-                                                    `<div class="d-flex flex-wrap gap-3">${radios}</div>`;
-                                            }
-                                            break;
-
-                                        case 'checkbox':
-                                            if (q.options) {
-                                                let checks = JSON.parse(q.options)
-                                                    .map(opt => `
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" 
-                           name="questions[${q.id}][]" 
-                           value="${opt}">
-                    <label class="form-check-label">${opt}</label>
-                </div>
-            `).join('');
-                                                field =
-                                                    `<div class="d-flex flex-wrap gap-3">${checks}</div>`;
-                                            }
-                                            break;
-
-                                    }
-
-
-                                    questionsContainer.innerHTML += `
-                                <div class="form-group mt-2">
-                                    <label>${q.question}</label>
-                                    ${field}
-                                </div>
-                            `;
-                                });
-                            }
-                        })
-                        .catch(err => console.error(err));
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.backdropFilter = 'blur(10px)';
+            } else {
+                navbar.style.background = 'var(--white)';
+                navbar.style.backdropFilter = 'none';
+            }
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-on-scroll');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all service and feature cards
+        document.querySelectorAll('.creative-service-card, .feature-card-modern').forEach(card => {
+            observer.observe(card);
         });
     </script>
 </body>

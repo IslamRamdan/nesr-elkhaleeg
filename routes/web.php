@@ -31,59 +31,18 @@ use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\TestController;
-use App\Models\Delegate;
-use App\Models\JobTitle;
+use App\Models\CompanySetting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('/', function () {
-    $governorates = [
-        'القاهرة',
-        'الجيزة',
-        'الأسكندرية',
-        'الدقهلية',
-        'البحر الأحمر',
-        'البحيرة',
-        'الفيوم',
-        'الغربية',
-        'الاسماعيلية',
-        'المنوفية',
-        'المنيا',
-        'القليوبية',
-        'الوادي الجديد',
-        'السويس',
-        'أسوان',
-        'أسيوط',
-        'بني سويف',
-        'بورسعيد',
-        'دمياط',
-        'الشرقية',
-        'ج سيناء',
-        'كفر الشيخ',
-        'مطروح',
-        'الاقصر',
-        'قنا',
-        'ش سيناء',
-        'سوهاج',
-        'السعودية',
-        'القدس',
-        'الأردن',
-        'العراق',
-        'لبنان',
-        'فلسطين',
-        'اليمن',
-        'عمان',
-        'الإمارات العربية المتحدة',
-        'الكويت',
-        'قطر',
-        'البحرين'
-    ];
-    $delegates = Delegate::all();
-    $jobs = JobTitle::all();
-
-    return view('welcome', compact('governorates', 'delegates', "jobs"));
+    $company = CompanySetting::first();
+    return view('welcome', compact('company'));
 });
+Route::get('/sign', [HomeController::class, 'sign'])->name('sign');
+
+
 Route::get('/sync-gmail', [JopController::class, 'sync'])->name('sync');
 
 Route::group([
