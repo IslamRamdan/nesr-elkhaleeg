@@ -78,15 +78,14 @@
                         </div>
                         <div class="col-md-4 form-group">
                             <label class="font-weight-bold">توكن الرسائل</label>
-                            <input type="text" class="form-control" name="token" value="{{ $company->token ?? '' }}"
-                                required>
+                            <input type="text" class="form-control" name="token" value="{{ $company->token ?? '' }}">
                             @if ($errors->has('token'))
                                 <div class="text-danger">
                                     {{ $errors->first('token') }}
                                 </div>
                             @endif
                         </div>
-                        <div class="col-md-4 form-group">
+                        {{-- <div class="col-md-4 form-group">
                             <label class="font-weight-bold">جملة في كارت الاختبار (تحت اسم الشركة)</label>
                             <input type="text" class="form-control" name="company_card_test"
                                 value="{{ $company->company_card_test ?? '' }}" required>
@@ -95,7 +94,7 @@
                                     {{ $errors->first('company_card_test') }}
                                 </div>
                             @endif
-                        </div>
+                        </div> --}}
                         <div class="col-md-4 form-group">
                             <label class="font-weight-bold d-block mb-2">شعار الشركة</label>
                             <div class="d-flex align-items-center gap-3">

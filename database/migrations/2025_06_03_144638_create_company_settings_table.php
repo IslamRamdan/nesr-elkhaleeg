@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string("medical_email")->nullable();
             $table->string("engaz_email");
             $table->string("engaz_password");
-            $table->string("company_card_test");
+            $table->string("company_card_test")->nullable();
             $table->timestamps();
         });
     }
