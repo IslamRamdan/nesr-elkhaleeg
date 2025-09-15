@@ -529,6 +529,55 @@ class LeadsCustomersController extends Controller
         return response()->json(['exists' => $exists]);
     }
 
+    public function signLead()
+    {
+        # code...
+        $governorates = [
+            'القاهرة',
+            'الجيزة',
+            'الأسكندرية',
+            'الدقهلية',
+            'البحر الأحمر',
+            'البحيرة',
+            'الفيوم',
+            'الغربية',
+            'الاسماعيلية',
+            'المنوفية',
+            'المنيا',
+            'القليوبية',
+            'الوادي الجديد',
+            'السويس',
+            'أسوان',
+            'أسيوط',
+            'بني سويف',
+            'بورسعيد',
+            'دمياط',
+            'الشرقية',
+            'ج سيناء',
+            'كفر الشيخ',
+            'مطروح',
+            'الاقصر',
+            'قنا',
+            'ش سيناء',
+            'سوهاج',
+            'السعودية',
+            'القدس',
+            'الأردن',
+            'العراق',
+            'لبنان',
+            'فلسطين',
+            'اليمن',
+            'عمان',
+            'الإمارات العربية المتحدة',
+            'الكويت',
+            'قطر',
+            'البحرين'
+        ];
+        $delegates = Delegate::all();
+        $jobs = JobTitle::all();
+
+        return view('sign-lead', compact('governorates', 'delegates', "jobs"));
+    }
     // انشاء عميل محتمل من صفحة الهوم
     public function createLead(Request $request)
     {

@@ -811,7 +811,7 @@
                         الجودة والمصداقية
                     </p>
                     <div class="hero-buttons-modern">
-                        <a href="{{ route('sign') }}" class="hero-btn-primary">
+                        <a href="{{ route('sign.lead') }}" class="hero-btn-primary">
                             <i class="fas fa-rocket me-2"></i>
                             سجل معنا
                         </a>

@@ -35,13 +35,12 @@ use App\Models\CompanySetting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+
 Auth::routes();
 Route::get('/', function () {
     $company = CompanySetting::first();
     return view('welcome', compact('company'));
 });
-Route::get('/sign', [HomeController::class, 'sign'])->name('sign');
-
 
 Route::get('/sync-gmail', [JopController::class, 'sync'])->name('sync');
 
@@ -260,6 +259,7 @@ Route::group([
 
     Route::get('/test-card/{lead}/{test}', [ReportsController::class, 'test_card'])->name('reports.test_card');
 });
+Route::get('/sign-lead', [LeadsCustomersController::class, 'signLead'])->name('sign.lead');
 Route::post('/crate-lead', [LeadsCustomersController::class, "createLead"])->name('create.lead');
 
 Route::get('/google/auth', [GoogleTranslateController::class, 'redirectToGoogle']);
